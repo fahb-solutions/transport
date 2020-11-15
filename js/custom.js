@@ -86,12 +86,12 @@ var directionDisplay;
                 //var minride = 300;
 
                 if (ridemin < 250){
-                  var minridecharg = +100;
-                $("#ridecharges i").text(ridemin + minridecharg);
-                $("#minridecharges").text('Your ride charges: ' + ridemin + ', Minimum Charges "' + minridecharg + '" applied on less than 200 PKR');
+                  var minridecharg = 250;
+                $("#ridecharges i").text(Math.round(minridecharg));
+                $("#minridecharges").text('Your ride charges: ' + ridemin + ', Minimum Charges "' + minridecharg + '" applied on less than 250 PKR');
                 }
                 else{
-                  $("#ridecharges i").text(ridemin);
+                  $("#ridecharges i").text(Math.round(ridemin));
                 }
             }
                             
