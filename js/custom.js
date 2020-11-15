@@ -48,11 +48,18 @@ var directionDisplay;
         var myOptions = {
             zoom:17,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            center: myl
+            center: myl,
         } 
-
-        //testing
-
+        
+      var startsearch = document.getElementById('start');
+      var options = {
+          componentRestrictions: {
+            country: 'pk'
+          }
+      };
+      
+            var autocomplete = new google.maps.places.Autocomplete(startsearch, options);
+        
 
         directionsDisplay = new google.maps.DirectionsRenderer();
         directionsDisplay.setMap(map);
@@ -120,40 +127,44 @@ function resetsearch(){
 }
 
 
-function whtspp(){
-  $('form').on('submit', function(){
-
-    var bookrideName = document.getElementById('bookname');
-    var bookrideNameValue = (bookrideName).value;
-
-    var bookridePhone = document.getElementById('bookphone');
-    var bookridePhoneValue = (bookridePhone).value;
-
-    var bookridefrm = document.getElementById('start');
-    var bookridefrmValue = (bookridefrm).value;
-    
-        var bookrideto = document.getElementById('end');
-        var bookridetoValue = (bookrideto).value;
-
-        var bookridetime = document.getElementById('timepick');
-        var bookridetimeValue = (bookridetime).value;
-
-        var bookrideseat = document.getElementById('seats');
-        var bookrideseatValue = (bookrideseat).value;
-
-        var bookridecharge = $('#ridecharges i').text();
-        var bookridechargeValue = (bookridecharge);
-
-
-    
-    
-        window.open('whatsapp://send?phone=+923112129313&text=Name: ' + bookrideNameValue + '%0aPhone: '  + bookridePhoneValue + '%0aPickup From: ' + bookridefrmValue + '%0aDrop Location: ' + bookridetoValue + '%0aPick Time: ' + bookridetimeValue + '%0aSeats: ' + bookrideseatValue + '%0aCharges: ' + bookridechargeValue + '%0aPlease confirm my ride,%0aThanks');
-
-      })
-    }
-
-
-
-
 
 $(document).ready(function(){!function(){var e,s,i=3500,n=3800,t=n-3e3,a=50,d=150,o=500,r=o+800,l=600,c=2500;function p(e){var s=f(e);if(e.parents(".cd-headline").hasClass("type")){var c=e.parent(".cd-words-wrapper");c.addClass("selected").removeClass("waiting"),setTimeout(function(){c.removeClass("selected"),e.removeClass("is-visible").addClass("is-hidden").children("i").removeClass("in").addClass("out")},o),setTimeout(function(){h(s,d)},r)}else if(e.parents(".cd-headline").hasClass("letters")){var v=e.children("i").length>=s.children("i").length;!function e(s,n,t,a){s.removeClass("in").addClass("out");s.is(":last-child")?t&&setTimeout(function(){p(f(n))},i):setTimeout(function(){e(s.next(),n,t,a)},a);if(s.is(":last-child")&&$("html").hasClass("no-csstransitions")){var d=f(n);m(n,d)}}(e.find("i").eq(0),e,v,a),u(s.find("i").eq(0),s,v,a)}else e.parents(".cd-headline").hasClass("clip")?e.parents(".cd-words-wrapper").animate({width:"2px"},l,function(){m(e,s),h(s)}):e.parents(".cd-headline").hasClass("loading-bar")?(e.parents(".cd-words-wrapper").removeClass("is-loading"),m(e,s),setTimeout(function(){p(s)},n),setTimeout(function(){e.parents(".cd-words-wrapper").addClass("is-loading")},t)):(m(e,s),setTimeout(function(){p(s)},i))}function h(e,s){e.parents(".cd-headline").hasClass("type")?(u(e.find("i").eq(0),e,!1,s),e.addClass("is-visible").removeClass("is-hidden")):e.parents(".cd-headline").hasClass("clip")&&e.parents(".cd-words-wrapper").animate({width:e.width()+10},l,function(){setTimeout(function(){p(e)},c)})}function u(e,s,n,t){e.addClass("in").removeClass("out"),e.is(":last-child")?(s.parents(".cd-headline").hasClass("type")&&setTimeout(function(){s.parents(".cd-words-wrapper").addClass("waiting")},100),n||setTimeout(function(){p(s)},i)):setTimeout(function(){u(e.next(),s,n,t)},t)}function f(e){return e.is(":last-child")?e.parent().children().eq(0):e.next()}function m(e,s){e.removeClass("is-visible").addClass("is-hidden"),s.removeClass("is-hidden").addClass("is-visible")}$(".cd-headline.letters").find("b").each(function(){var e=$(this),s=e.text().split(""),i=e.hasClass("is-visible");for(var n in s)e.parents(".rotate-2").length>0&&(s[n]="<em>"+s[n]+"</em>"),s[n]=i?'<i class="in">'+s[n]+"</i>":"<i>"+s[n]+"</i>";var t=s.join("");e.html(t).css("opacity",1)}),e=$(".cd-headline"),s=i,e.each(function(){var e=$(this);if(e.hasClass("loading-bar"))s=n,setTimeout(function(){e.find(".cd-words-wrapper").addClass("is-loading")},t);else if(e.hasClass("clip")){var i=e.find(".cd-words-wrapper"),a=i.width()+10;i.css("width",a)}else if(!e.hasClass("type")){var d=e.find(".cd-words-wrapper b"),o=0;d.each(function(){var e=$(this).width();e>o&&(o=e)}),e.find(".cd-words-wrapper").css("width",o)}setTimeout(function(){p(e.find(".is-visible").eq(0))},s)}),$(".cd-words-wrapper").css("width","200px")}()});
+
+
+
+$('#ridebookform').on('submit', function() {
+
+var validname = document.getElementById("bookname").value;
+var validphone = document.getElementById("bookphone").value;
+if (validname != '' && validphone != '') {
+alert("Name & Phone are required.....!");
+}
+else{
+  
+  var bookrideName = document.getElementById('bookname');
+  var bookrideNameValue = (bookrideName).value;
+
+  var bookridePhone = document.getElementById('bookphone');
+  var bookridePhoneValue = (bookridePhone).value;
+
+  var bookridefrm = document.getElementById('start');
+  var bookridefrmValue = (bookridefrm).value;
+  
+      var bookrideto = document.getElementById('end');
+      var bookridetoValue = (bookrideto).value;
+
+      var bookridetime = document.getElementById('timepick');
+      var bookridetimeValue = (bookridetime).value;
+
+      var bookrideseat = document.getElementById('seats');
+      var bookrideseatValue = (bookrideseat).value;
+
+      var bookridecharge = $('#ridecharges i').text();
+      var bookridechargeValue = (bookridecharge);
+
+
+      
+      window.open('whatsapp://send?phone=+923112129313&text=Name: ' + bookrideNameValue + '%0aPhone: '  + bookridePhoneValue + '%0aPickup From: ' + bookridefrmValue + '%0aDrop Location: ' + bookridetoValue + '%0aPick Time: ' + bookridetimeValue + '%0aSeats: ' + bookrideseatValue + '%0aCharges: ' + bookridechargeValue + '%0aPlease confirm my ride,%0aThanks');
+
+  }
+});
