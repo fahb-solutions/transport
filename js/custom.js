@@ -168,3 +168,11 @@ else{
 
   }
 });
+
+
+$('.inputfield.start i').on('click', function() {
+  $('#start').val('');
+})
+$('.inputfield.end i').on('click', function() {
+  $('#end').val('');
+})
