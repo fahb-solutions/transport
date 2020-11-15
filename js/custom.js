@@ -119,8 +119,9 @@ function resetsearch(){
   
 }
 
-$('form').on('submit', function(){
+
 function whtspp(){
+  $('form').on('submit', function(){
 
     var bookrideName = document.getElementById('bookname');
     var bookrideNameValue = (bookrideName).value;
@@ -148,9 +149,10 @@ function whtspp(){
     
         window.open('whatsapp://send?phone=+923112129313&text=Name: ' + bookrideNameValue + '%0aPhone: '  + bookridePhoneValue + '%0aPickup From: ' + bookridefrmValue + '%0aDrop Location: ' + bookridetoValue + '%0aPick Time: ' + bookridetimeValue + '%0aSeats: ' + bookrideseatValue + '%0aCharges: ' + bookridechargeValue + '%0aPlease confirm my ride,%0aThanks');
 
-}
+      })
+    }
 
-})
+
 
 
 
