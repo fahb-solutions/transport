@@ -119,7 +119,7 @@ function resetsearch(){
   
 }
 
-$(form).on('submit', function(){
+$('form').on('submit', function(){
 function whtspp(){
 
     var bookrideName = document.getElementById('bookname');
