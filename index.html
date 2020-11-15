@@ -86,7 +86,7 @@
     <div class="w3l-form-12-content w3l-form-12 ">
         <div class="wrapper">   
             <h4 class="heading">Book a Ride</h4>
-            <form id="ridebookform">
+            <form id="ridebookform" onsubmit="return ValidationEvent()" method="post">
               <div class="text-left dd-boxes">
                 <div class="grid grid-column-2 mt-1">
                   <h4 class="mt-1">Enter Name:</h4>
@@ -115,19 +115,19 @@
       </div>
       <div class="grid grid-column-2 mb-1" >
             <h4 class="mt-1">Calculate Ride Charges:</h4>
-            <div class="btnlinks"><button id="estimate" class="readmore mt-1" onclick="calcRoute()">Estimate Ride Charges</button> <button onclick="resetsearch()">Clear</button></div>
+            <div class="btnlinks"><a id="estimate" class="readmore mt-1" onclick="calcRoute()">Estimate Ride Charges</a> <a  onclick="resetsearch()">Clear</a></div>
             <div id="distanceKm"></div>
           </div>
           <div class="grid grid-column-2 mb-1 ">
             <h4 class="mt-1">Your Ride Charges:
               <p><small>Minimum Ride Starting: Rs. 250/- | per km 25Rs</small></p>
             </h4>
-            <span id="ridecharges" class="font-large" ><em class="fas fa-money-bill-alt"></em> <i>150</i>/- <br>
+            <span id="ridecharges" class="font-large" ><em class="fas fa-money-bill-alt"></em> <i>250</i>/- <br>
             <small id="minridecharges"></small></span>
           </div>
               <div class="grid grid-column-2 mb-1 ">
                   <h4 class="mt-1">&nbsp;</h4>
-                  <button id="ddbtn" class="readmore mt-1 btn" onclick="whtspp()" data-action="share/whatsapp/share">Get a Qoute / Confirm Ride</button>
+                  <button id="ddbtn" class="readmore mt-1 btn" type="button" data-action="share/whatsapp/share">Get a Qoute / Confirm Ride</button>
                 </div>
               </div></form>
               
@@ -226,6 +226,5 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuV4E6Vyx3KVTkTkiBNGOKgbMtsRPb6jY&signed_in=flase&libraries=places"></script>
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/custom.js"></script>
-
   </body>
   </html>
