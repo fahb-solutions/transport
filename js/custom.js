@@ -108,24 +108,7 @@ var directionDisplay;
         });         
     }
 
-$("form").on("submit", function(event){
-  event.preventDefault();
-
-});
-$("#end").on("change", function(){
-  calcRoute();
-
-})
-$("#start").on("change", function(){
-  calcRoute();
-});
-
-function resetsearch(){
-  $("#start").val('');
-  $("#end").val('');
-  $("#ridecharges i").text('000');
-  
-}
+    
 
 
 
@@ -135,13 +118,6 @@ $(document).ready(function(){!function(){var e,s,i=3500,n=3800,t=n-3e3,a=50,d=15
 
 $('#ridebookform').on('submit', function() {
 
-var validname = document.getElementById("bookname").value;
-var validphone = document.getElementById("bookphone").value;
-if (validname != '' && validphone != '') {
-alert("Name & Phone are required.....!");
-}
-else{
-  
   var bookrideName = document.getElementById('bookname');
   var bookrideNameValue = (bookrideName).value;
 
@@ -162,12 +138,9 @@ else{
 
       var bookridecharge = $('#ridecharges i').text();
       var bookridechargeValue = (bookridecharge);
-
-
       
       window.open('whatsapp://send?phone=+923112129313&text=Name: ' + bookrideNameValue + '%0aPhone: '  + bookridePhoneValue + '%0aPickup From: ' + bookridefrmValue + '%0aDrop Location: ' + bookridetoValue + '%0aPick Time: ' + bookridetimeValue + '%0aSeats: ' + bookrideseatValue + '%0aCharges: ' + bookridechargeValue + '%0aPlease confirm my ride,%0aThanks');
 
-  }
 });
 
 
@@ -177,3 +150,18 @@ $('.inputfield.start i').on('click', function() {
 $('.inputfield.end i').on('click', function() {
   $('#end').val('');
 })
+
+$("#end").on("change", function(){
+  calcRoute();
+
+})
+$("#start").on("change", function(){
+  calcRoute();
+});
+
+function resetsearch(){
+  $("#start").val('');
+  $("#end").val('');
+  $("#ridecharges i").text('000');
+  
+}
