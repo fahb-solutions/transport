@@ -51,15 +51,26 @@ var directionDisplay;
             center: myl,
         } 
         
-      var startsearch = document.getElementById('start');
-      var endsearch = document.getElementById('end');
-      var options = {
+        var startsearch = document.getElementById('start');
+        var startoptions = {
           componentRestrictions: {
             country: 'pk'
           }
       };
+
+      var autocompletestart = new google.maps.places.Autocomplete(startsearch, startoptions);
+
+      var endsearch = document.getElementById('end');
+      var endoptions = {
+        componentRestrictions: {
+          country: 'pk'
+        }
+    };
+
+
+    var autocompletend = new google.maps.places.Autocomplete(endsearch, endoptions);
       
-            var autocomplete = new google.maps.places.Autocomplete(startsearch, endsearch, options);
+            
         
 
         directionsDisplay = new google.maps.DirectionsRenderer();
@@ -107,8 +118,21 @@ var directionDisplay;
  
         });         
     }
+ 
+$("#end").on("change", function(){
+  calcRoute();
 
-    
+})
+$("#start").on("change", function(){
+  calcRoute();
+});
+
+function resetsearch(){
+  $("#start").val('');
+  $("#end").val('');
+  $("#ridecharges i").text('000');
+  
+}
 
 
 
@@ -118,6 +142,7 @@ $(document).ready(function(){!function(){var e,s,i=3500,n=3800,t=n-3e3,a=50,d=15
 
 $('#ridebookform').on('submit', function() {
 
+ 
   var bookrideName = document.getElementById('bookname');
   var bookrideNameValue = (bookrideName).value;
 
@@ -138,8 +163,11 @@ $('#ridebookform').on('submit', function() {
 
       var bookridecharge = $('#ridecharges i').text();
       var bookridechargeValue = (bookridecharge);
+
+
       
       window.open('whatsapp://send?phone=+923112129313&text=Name: ' + bookrideNameValue + '%0aPhone: '  + bookridePhoneValue + '%0aPickup From: ' + bookridefrmValue + '%0aDrop Location: ' + bookridetoValue + '%0aPick Time: ' + bookridetimeValue + '%0aSeats: ' + bookrideseatValue + '%0aCharges: ' + bookridechargeValue + '%0aPlease confirm my ride,%0aThanks');
+
 
 });
 
@@ -150,18 +178,3 @@ $('.inputfield.start i').on('click', function() {
 $('.inputfield.end i').on('click', function() {
   $('#end').val('');
 })
-
-$("#end").on("change", function(){
-  calcRoute();
-
-})
-$("#start").on("change", function(){
-  calcRoute();
-});
-
-function resetsearch(){
-  $("#start").val('');
-  $("#end").val('');
-  $("#ridecharges i").text('000');
-  
-}
