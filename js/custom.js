@@ -52,13 +52,14 @@ var directionDisplay;
         } 
         
       var startsearch = document.getElementById('start');
+      var endsearch = document.getElementById('end');
       var options = {
           componentRestrictions: {
             country: 'pk'
           }
       };
       
-            var autocomplete = new google.maps.places.Autocomplete(startsearch, options);
+            var autocomplete = new google.maps.places.Autocomplete(startsearch, endsearch, options);
         
 
         directionsDisplay = new google.maps.DirectionsRenderer();
