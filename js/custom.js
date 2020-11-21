@@ -1,4 +1,23 @@
 
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyBUIjalmE7Pt-koa3DczCHeVlY_0nOmHEI",
+    authDomain: "fahb-transport.firebaseapp.com",
+    databaseURL: "https://fahb-transport.firebaseio.com",
+    projectId: "fahb-transport",
+    storageBucket: "fahb-transport.appspot.com",
+    messagingSenderId: "931088747852",
+    appId: "1:931088747852:web:ba7c1496e899d196a793e9",
+    measurementId: "G-LL9GFSD8R7"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  /* Firebase Collectin */
+  var messageRef = firebase.database().ref('messages');
     
   var input = document.querySelector("#bookphone");
   window.intlTelInput(input, {
@@ -101,7 +120,7 @@ var directionDisplay;
                 distanceInput.value = response.routes[0].legs[0].distance.value / 1000; 
         //        distanceMl.value =  response.routes[0].legs[0].distance.value * 0.000621371;
          //       price.value = distanceMl.value * 2.50;
-                var ridemin = distanceInput.value * 25;
+                var ridemin = distanceInput.value * 30;
                 //var minride = 300;
 
                 if (ridemin < 250){
@@ -130,6 +149,8 @@ $("#start").on("change", function(){
 function resetsearch(){
   $("#start").val('');
   $("#end").val('');
+  $("#bookname").val('');
+  $("#bookphone").val('');
   $("#ridecharges i").text('000');
   
 }
@@ -140,7 +161,7 @@ $(document).ready(function(){!function(){var e,s,i=3500,n=3800,t=n-3e3,a=50,d=15
 
 
 
-$('#ridebookform').on('submit', function() {
+$('#ridebookform').on('submit', function(e) {
 
  
   var bookrideName = document.getElementById('bookname');
@@ -164,8 +185,10 @@ $('#ridebookform').on('submit', function() {
       var bookridecharge = $('#ridecharges i').text();
       var bookridechargeValue = (bookridecharge);
 
-
-      
+      //send data
+      saveMessage(bookrideNameValue, bookridePhoneValue, bookridefrmValue, bookridetoValue, bookridetimeValue, bookrideseatValue, bookridechargeValue);
+      //e.preventDefault();
+      //whatsapp
       window.open('whatsapp://send?phone=+923112129313&text=Name: ' + bookrideNameValue + '%0aPhone: '  + bookridePhoneValue + '%0aPickup From: ' + bookridefrmValue + '%0aDrop Location: ' + bookridetoValue + '%0aPick Time: ' + bookridetimeValue + '%0aSeats: ' + bookrideseatValue + '%0aCharges: ' + bookridechargeValue + '%0aPlease confirm my ride,%0aThanks');
 
 
@@ -178,3 +201,64 @@ $('.inputfield.start i').on('click', function() {
 $('.inputfield.end i').on('click', function() {
   $('#end').val('');
 })
+
+
+
+
+
+var latitudeAndLongitude=document.getElementById("latitudeAndLongitude"),
+mylocation={
+    latitude:'',
+    longitude:''
+};
+
+if (navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+else{
+    latitudeAndLongitude.innerHTML="Geolocation is not supported by this browser.";
+}
+
+function showPosition(position){ 
+    mylocation.latitude=position.coords.latitude;
+    mylocation.longitude=position.coords.longitude;
+    latitudeAndLongitude = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude; 
+    var geocoder = new google.maps.Geocoder();
+    var latLng = new google.maps.LatLng(mylocation.latitude, mylocation.longitude);
+
+ if (geocoder) {
+    geocoder.geocode({ 'latLng': latLng}, function (results, status) {
+       if (status == google.maps.GeocoderStatus.OK) {
+         console.log(results[0].formatted_address); 
+         $('#start').val(results[0].formatted_address);
+       }
+       else {
+        $('#starterror').html('Geocoding failed: '+status);
+        console.log("Geocoding failed: " + status);
+       }
+    }); //geocoder.geocode()
+  }
+  
+} //showPosition
+
+$('#getmylocation').on('click', function(e){
+  navigator.geolocation.getCurrentPosition(showPosition);
+  e.preventDefault();
+});
+
+
+// Save data
+  function saveMessage(bookrideNameValue, bookridePhoneValue, bookridefrmValue, bookridetoValue, bookridetimeValue, bookrideseatValue, bookridechargeValue){
+    var newMessageRef = messageRef.push();
+    newMessageRef.set({
+        bookname: bookrideNameValue,
+        bookphone:bookridePhoneValue,
+        ridefrom: bookridefrmValue,
+        rideto: bookridetoValue,
+        ridetime:bookridetimeValue,
+        rideseat:bookrideseatValue,
+        ridecharges: bookridechargeValue
+
+    })
+  } 
